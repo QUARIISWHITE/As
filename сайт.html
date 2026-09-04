@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ашот Гукасян | Фотограф в Сочи</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            line-height: 1.6;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        img {
+            max-width: 100%;
+            display: block;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        .section-label {
+            color: #ff6b35;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        .section-title {
+            font-size: 44px;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+        .section-subtitle {
+            font-size: 18px;
+            color: #aaa;
+            max-width: 560px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 18px 48px;
+            background: #ff6b35;
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            transition: 0.5s;
+        }
+        .btn:hover::after {
+            left: 100%;
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(255, 107, 53, 0.4);
+            background: #ff5a22;
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #ff6b35;
+            color: #ff6b35;
+            padding: 14px 36px;
+        }
+        .btn-outline:hover {
+            background: #ff6b35;
+            color: #fff;
+            box-shadow: 0 12px 40px rgba(255, 107, 53, 0.3);
+        }
+
+        /* ===== ANIMATIONS ===== */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .fade-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .fade-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .fade-right {
+            opacity: 0;
+            transform: translateX(60px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .fade-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .scale-up {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .scale-up.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* ===== NAV ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 18px 0;
+            z-index: 1000;
+            transition: all 0.4s ease;
+            background: transparent;
+        }
+        .navbar.scrolled {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: #fff;
+        }
+        .logo span {
+            color: #ff6b35;
+        }
+        .nav-links {
+            display: flex;
+            gap: 36px;
+            list-style: none;
+            align-items: center;
+        }
+        .nav-links a {
+            color: #ccc;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ff6b35;
+            transition: width 0.3s;
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        .nav-links a:hover {
+            color: #fff;
+        }
+        .nav-cta {
+            background: #ff6b35;
+            padding: 10px 24px;
+            border-radius: 50px;
+            color: #fff !important;
+            font-weight: 600;
+        }
+        .nav-cta::after {
+            display: none !important;
+        }
+        .nav-cta:hover {
+            background: #ff5a22;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+        }
+        .burger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+        }
+        .burger span {
+            width: 28px;
+            height: 2px;
+            background: #fff;
+            transition: 0.3s;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            background: #0a0a0a;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(255,107,53,0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        .hero-content h1 {
+            font-size: 56px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+        .hero-content h1 span {
+            color: #ff6b35;
+            position: relative;
+        }
+        .hero-content h1 span::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: rgba(255,107,53,0.25);
+            border-radius: 4px;
+        }
+        .hero-content p {
+            font-size: 19px;
+            color: #aaa;
+            max-width: 480px;
+            margin-bottom: 32px;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .hero-image {
+            position: relative;
+        }
+        .hero-image img {
+            border-radius: 20px;
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            box-shadow: 0 20px 80px rgba(0,0,0,0.6);
+            transition: transform 0.5s;
+        }
+        .hero-image img:hover {
+            transform: scale(1.02);
+        }
+        .hero-image .badge {
+            position: absolute;
+            bottom: 24px;
+            left: 24px;
+            background: rgba(10,10,10,0.85);
+            backdrop-filter: blur(20px);
+            padding: 16px 24px;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .hero-image .badge .number {
+            font-size: 32px;
+            font-weight: 800;
+            color: #ff6b35;
+        }
+        .hero-image .badge .label {
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        /* ===== STATS ===== */
+        .stats {
+            padding: 60px 0;
+            background: #0f0f0f;
+            border-top: 1px solid rgba(255,255,255,0.04);
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            text-align: center;
+        }
+        .stats-grid .stat .number {
+            font-size: 44px;
+            font-weight: 800;
+            color: #ff6b35;
+        }
+        .stats-grid .stat .label {
+            color: #aaa;
+            font-size: 15px;
+            margin-top: 4px;
+        }
+
+        /* ===== ABOUT ===== */
+        .about {
+            padding: 100px 0;
+            background: #0a0a0a;
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .about-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .about-images .big {
+            grid-row: span 2;
+            height: 100%;
+            min-height: 300px;
+        }
+        .about-images img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 16px;
+            transition: transform 0.4s;
+        }
+        .about-images img:hover {
+            transform: scale(1.04);
+        }
+        .about-images .big {
+            height: 416px;
+        }
+        .about-content .section-title {
+            margin-bottom: 16px;
+        }
+        .about-content p {
+            font-size: 18px;
+            color: #bbb;
+            margin-bottom: 24px;
+        }
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .about-features li {
+            list-style: none;
+            font-size: 15px;
+            color: #ccc;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .about-features li::before {
+            content: '✦';
+            color: #ff6b35;
+            font-size: 18px;
+        }
+
+        /* ===== SERVICES ===== */
+        .services {
+            padding: 100px 0;
+            background: #0f0f0f;
+        }
+        .services .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .services .section-header .section-subtitle {
+            margin: 0 auto;
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .service-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            padding: 40px 32px;
+            border-radius: 20px;
+            transition: all 0.4s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #ff6b35, #ff9a56);
+            transform: scaleX(0);
+            transition: transform 0.4s;
+        }
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255,107,53,0.2);
+            box-shadow: 0 20px 60px rgba(255,107,53,0.06);
+        }
+        .service-card .icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+        .service-card h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .service-card .price {
+            font-size: 26px;
+            font-weight: 700;
+            color: #ff6b35;
+            margin: 12px 0;
+        }
+        .service-card p {
+            color: #aaa;
+            font-size: 15px;
+            margin-bottom: 20px;
+        }
+
+        /* ===== PORTFOLIO ===== */
+        .portfolio {
+            padding: 100px 0;
+            background: #0a0a0a;
+        }
+        .portfolio .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.4s;
+        }
+        .portfolio-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.6s;
+        }
+        .portfolio-item:hover img {
+            transform: scale(1.08);
+        }
+        .portfolio-item .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(0deg, rgba(10,10,10,0.8) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s;
+            display: flex;
+            align-items: flex-end;
+            padding: 24px;
+        }
+        .portfolio-item:hover .overlay {
+            opacity: 1;
+        }
+        .portfolio-item .overlay span {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .portfolio-item.large {
+            grid-row: span 2;
+        }
+        .portfolio-item.large img {
+            height: 620px;
+        }
+
+        /* ===== STEPS ===== */
+        .steps {
+            padding: 100px 0;
+            background: #0f0f0f;
+        }
+        .steps .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .steps-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .step {
+            display: flex;
+            gap: 28px;
+            margin-bottom: 48px;
+            align-items: flex-start;
+        }
+        .step:last-child {
+            margin-bottom: 0;
+        }
+        .step .number {
+            flex-shrink: 0;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #ff6b35, #ff9a56);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 800;
+        }
+        .step .line {
+            width: 2px;
+            background: rgba(255,255,255,0.08);
+            margin: 8px auto 0;
+            height: 50px;
+        }
+        .step:last-child .line {
+            display: none;
+        }
+        .step .info h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .step .info p {
+            color: #aaa;
+            font-size: 17px;
+        }
+
+        /* ===== PRICING ===== */
+        .pricing {
+            padding: 100px 0;
+            background: #0a0a0a;
+        }
+        .pricing .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .pricing-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            padding: 40px 32px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.4s;
+        }
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255,107,53,0.2);
+            box-shadow: 0 20px 60px rgba(255,107,53,0.06);
+        }
+        .pricing-card.featured {
+            border-color: #ff6b35;
+            background: rgba(255,107,53,0.04);
+        }
+        .pricing-card .plan {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ff6b35;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .pricing-card h3 {
+            font-size: 28px;
+            font-weight: 800;
+            margin: 12px 0;
+        }
+        .pricing-card .price {
+            font-size: 48px;
+            font-weight: 800;
+            color: #ff6b35;
+            margin: 16px 0;
+        }
+        .pricing-card .price small {
+            font-size: 18px;
+            color: #aaa;
+            font-weight: 400;
+        }
+        .pricing-card ul {
+            list-style: none;
+            margin: 24px 0;
+        }
+        .pricing-card ul li {
+            padding: 8px 0;
+            color: #ccc;
+            font-size: 15px;
+        }
+        .pricing-card ul li::before {
+            content: '✓ ';
+            color: #ff6b35;
+            font-weight: 700;
+        }
+
+        /* ===== SOCIAL PROOF ===== */
+        .social-proof {
+            padding: 60px 0;
+            background: #0f0f0f;
+            border-top: 1px solid rgba(255,255,255,0.04);
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .social-proof .container {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            flex-wrap: wrap;
+        }
+        .social-proof a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 28px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 50px;
+            border: 1px solid rgba(255,255,255,0.06);
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        .social-proof a:hover {
+            background: rgba(255,107,53,0.08);
+            border-color: rgba(255,107,53,0.2);
+            transform: translateY(-2px);
+        }
+        .social-proof .icon {
+            font-size: 24px;
+        }
+
+        /* ===== CONTACT ===== */
+        .contact {
+            padding: 100px 0;
+            background: #0a0a0a;
+            text-align: center;
+        }
+        .contact .section-title {
+            margin-bottom: 16px;
+        }
+        .contact .section-subtitle {
+            margin: 0 auto 48px;
+        }
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .contact-item {
+            padding: 32px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.04);
+            transition: all 0.3s;
+        }
+        .contact-item:hover {
+            border-color: rgba(255,107,53,0.2);
+            transform: translateY(-4px);
+        }
+        .contact-item .icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+        .contact-item h4 {
+            font-size: 14px;
+            color: #aaa;
+            font-weight: 400;
+        }
+        .contact-item a {
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+            transition: color 0.3s;
+        }
+        .contact-item a:hover {
+            color: #ff6b35;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            padding: 32px 0;
+            background: #050505;
+            border-top: 1px solid rgba(255,255,255,0.04);
+            text-align: center;
+        }
+        .footer p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* ===== LIGHTBOX ===== */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.92);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            cursor: pointer;
+        }
+        .lightbox.active {
+            display: flex;
+        }
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 12px;
+            object-fit: contain;
+            animation: zoomInLightbox 0.4s ease;
+        }
+        @keyframes zoomInLightbox {
+            0% { transform: scale(0.9); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .lightbox .close {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            font-size: 40px;
+            color: #fff;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .lightbox .close:hover {
+            transform: rotate(90deg);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+            .hero-content h1 { font-size: 40px; }
+            .hero-image img { height: 400px; }
+            .about-grid { grid-template-columns: 1fr; }
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+            .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+            .contact-info { grid-template-columns: 1fr 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(10,10,10,0.98);
+                padding: 24px;
+                gap: 20px;
+                border-bottom: 1px solid rgba(255,255,255,0.04);
+            }
+            .nav-links.open {
+                display: flex;
+            }
+            .burger {
+                display: flex;
+            }
+            .hero-content h1 { font-size: 32px; }
+            .hero-image img { height: 300px; }
+            .section-title { font-size: 30px; }
+            .services-grid { grid-template-columns: 1fr; }
+            .portfolio-grid { grid-template-columns: 1fr; }
+            .portfolio-item.large { grid-row: span 1; }
+            .portfolio-item.large img { height: 300px; }
+            .pricing-grid { grid-template-columns: 1fr; }
+            .contact-info { grid-template-columns: 1fr; }
+            .about-images .big { height: 200px; }
+            .about-images img { height: 180px; }
+            .stats-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+            .stats-grid .stat .number { font-size: 30px; }
+            .step { flex-direction: column; align-items: center; text-align: center; }
+            .step .line { display: none; }
+            .social-proof .container { gap: 12px; }
+            .social-proof a { padding: 10px 18px; font-size: 14px; }
+        }
+        @media (max-width: 480px) {
+            .hero-content h1 { font-size: 28px; }
+            .hero-content p { font-size: 16px; }
+            .hero-buttons .btn { width: 100%; text-align: center; }
+            .container { padding: 0 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="#" class="logo">ASHOT<span>.</span></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about">Обо мне</a></li>
+                <li><a href="#services">Услуги</a></li>
+                <li><a href="#portfolio">Портфолио</a></li>
+                <li><a href="#pricing">Цены</a></li>
+                <li><a href="#contact" class="nav-cta">Связаться</a></li>
+            </ul>
+            <div class="burger" id="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="hero">
+        <div class="container hero-grid">
+            <div class="hero-content fade-up">
+                <div class="section-label">Фотограф в Сочи</div>
+                <h1>Ашот <span>Гукасян</span></h1>
+                <p>Искренние и живые портреты, где каждая эмоция — это история. Снимаю взрослых и детей на лучших локациях Сочи: от моря до гор.</p>
+                <div class="hero-buttons">
+                    <a href="#portfolio" class="btn">Смотреть портфолио</a>
+                    <a href="#contact" class="btn btn-outline">Связаться</a>
+                </div>
+            </div>
+            <div class="hero-image fade-up" style="transition-delay:0.2s;">
+                <img src="https://static.tildacdn.pub/tild3931-3430-4362-b031-616265306436/IMG_8761.jpeg" alt="Ашот Гукасян" />
+                <div class="badge">
+                    <div class="number">7+</div>
+                    <div class="label">лет опыта</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== STATS ===== -->
+    <section class="stats">
+        <div class="container stats-grid">
+            <div class="stat fade-up">
+                <div class="number">500+</div>
+                <div class="label">довольных клиентов</div>
+            </div>
+            <div class="stat fade-up" style="transition-delay:0.1s;">
+                <div class="number">1500+</div>
+                <div class="label">фотосессий проведено</div>
+            </div>
+            <div class="stat fade-up" style="transition-delay:0.2s;">
+                <div class="number">50+</div>
+                <div class="label">уникальных локаций</div>
+            </div>
+            <div class="stat fade-up" style="transition-delay:0.3s;">
+                <div class="number">100%</div>
+                <div class="label">эмоций в каждом кадре</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="about" id="about">
+        <div class="container about-grid">
+            <div class="about-images fade-left">
+                <img class="big" src="https://static.tildacdn.pub/tild6437-3237-4264-b461-393734613366/_MG_9975.jpg" alt="Фото 1" />
+                <img src="https://static.tildacdn.pub/tild6364-6233-4237-b137-343935653938/_MG_1554.jpg" alt="Фото 2" />
+                <img src="https://static.tildacdn.pub/tild6434-6133-4366-a632-306433336239/IMG_2121.PNG" alt="Фото 3" />
+            </div>
+            <div class="about-content fade-right">
+                <div class="section-label">Обо мне</div>
+                <h2 class="section-title">Почему выбирают <span style="color:#ff6b35;">меня</span></h2>
+                <p>Индивидуальный подход к каждому клиенту, умение передать искренние эмоции и создать живое настроение. Я использую лучшие локации Сочи — от моря до гор. Профессионализм и особое внимание к детским фотосессиям делают мою работу уникальной.</p>
+                <ul class="about-features">
+                    <li>Индивидуальный подход</li>
+                    <li>Живые эмоции в кадре</li>
+                    <li>Лучшие локации Сочи</li>
+                    <li>Детские фотосессии</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SERVICES ===== -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Мои услуги</div>
+                <h2 class="section-title">Что я <span style="color:#ff6b35;">предлагаю</span></h2>
+                <p class="section-subtitle">Портретная, творческая и детская фотосъёмка в Сочи. Эмоции, свет и настроение — основа моих работ.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card scale-up">
+                    <div class="icon">📸</div>
+                    <h3>Портретная съёмка</h3>
+                    <div class="price">от 5 000 ₽</div>
+                    <p>Индивидуальные и семейные портреты, которые передают вашу уникальность и характер.</p>
+                </div>
+                <div class="service-card scale-up" style="transition-delay:0.1s;">
+                    <div class="icon">👶</div>
+                    <h3>Детская съёмка</h3>
+                    <div class="price">от 4 000 ₽</div>
+                    <p>Естественные и живые фото детей. Создаю комфортную атмосферу для самых маленьких.</p>
+                </div>
+                <div class="service-card scale-up" style="transition-delay:0.2s;">
+                    <div class="icon">🎓</div>
+                    <h3>Для учебных заведений</h3>
+                    <div class="price">по запросу</div>
+                    <p>Выпускные альбомы, портфолио учеников, фото для сайтов и рекламных материалов.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PORTFOLIO ===== -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Портфолио</div>
+                <h2 class="section-title">Мои <span style="color:#ff6b35;">работы</span></h2>
+                <p class="section-subtitle">Остальные свои работы я могу показать при личной встрече и подборе стиля</p>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item scale-up" onclick="openLightbox(this)">
+                    <img src="https://static.tildacdn.pub/tild3530-6663-4561-b865-373839646538/_MG_0015.jpg" alt="Работа 1" />
+                    <div class="overlay"><span>Портретная съёмка</span></div>
+                </div>
+                <div class="portfolio-item scale-up" style="transition-delay:0.1s;" onclick="openLightbox(this)">
+                    <img src="https://static.tildacdn.pub/tild3936-6664-4763-b036-383434343935/20260606-_MG_4668.jpg" alt="Работа 2" />
+                    <div class="overlay"><span>Творческий портрет</span></div>
+                </div>
+                <div class="portfolio-item scale-up" style="transition-delay:0.2s;" onclick="openLightbox(this)">
+                    <img src="https://static.tildacdn.pub/tild6665-6663-4533-b332-663733323862/_MG_1146.jpg" alt="Работа 3" />
+                    <div class="overlay"><span>Семейная съёмка</span></div>
+                </div>
+                <div class="portfolio-item large scale-up" style="transition-delay:0.3s;" onclick="openLightbox(this)">
+                    <img src="https://static.tildacdn.pub/tild3434-6632-4037-a331-376534316162/IMG_8767.jpeg" alt="Работа 4" />
+                    <div class="overlay"><span>Детская съёмка</span></div>
+                </div>
+                <div class="portfolio-item scale-up" style="transition-delay:0.4s;" onclick="openLightbox(this)">
+                    <img src="https://static.tildacdn.pub/tild6664-3961-4061-b534-656536616365/_MG_0240.jpg" alt="Работа 5" />
+                    <div class="overlay"><span>Портрет</span></div>
+                </div>
+                <div class="portfolio-item scale-up" style="transition-delay:0.5s;" onclick="openLightbox(this)">
+                    <img src="https://static.tildacdn.pub/tild3162-6535-4134-a231-323836353130/20260606-_MG_4680.jpg" alt="Работа 6" />
+                    <div class="overlay"><span>Творческая съёмка</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== STEPS ===== -->
+    <section class="steps" id="steps">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Как мы работаем</div>
+                <h2 class="section-title">Этапы <span style="color:#ff6b35;">фотосессии</span></h2>
+            </div>
+            <div class="steps-list">
+                <div class="step fade-left">
+                    <div class="number">1</div>
+                    <div class="line"></div>
+                    <div class="info">
+                        <h3>Выбор локации</h3>
+                        <p>Подбираем идеальное место: морское побережье, горные пейзажи или городские виды Сочи.</p>
+                    </div>
+                </div>
+                <div class="step fade-left" style="transition-delay:0.15s;">
+                    <div class="number">2</div>
+                    <div class="line"></div>
+                    <div class="info">
+                        <h3>Планирование съемки</h3>
+                        <p>Обсуждаем концепцию, выбираем локации и продумываем композицию каждого кадра.</p>
+                    </div>
+                </div>
+                <div class="step fade-left" style="transition-delay:0.3s;">
+                    <div class="number">3</div>
+                    <div class="line"></div>
+                    <div class="info">
+                        <h3>Создание атмосферы</h3>
+                        <p>Использую естественное освещение и природные элементы для уникальных и эмоциональных кадров.</p>
+                    </div>
+                </div>
+                <div class="step fade-left" style="transition-delay:0.45s;">
+                    <div class="number">4</div>
+                    <div class="info">
+                        <h3>Обработка и результат</h3>
+                        <p>Профессиональная ретушь и цветокоррекция. Вы получаете готовые фото в течение 5-7 дней.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PRICING ===== -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Цены</div>
+                <h2 class="section-title">Выберите свой <span style="color:#ff6b35;">пакет</span></h2>
+                <p class="section-subtitle">Подберу идеальный вариант под ваши задачи и бюджет</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card scale-up">
+                    <div class="plan">Старт</div>
+                    <h3>Базовый</h3>
+                    <div class="price">5 000 <small>₽</small></div>
+                    <ul>
+                        <li>1 час съёмки</li>
+                        <li>30 обработанных фото</li>
+                        <li>Одна локация</li>
+                        <li>Срок — 5 дней</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline" style="width:100%;">Выбрать</a>
+                </div>
+                <div class="pricing-card featured scale-up" style="transition-delay:0.1s;">
+                    <div class="plan">Популярный</div>
+                    <h3>Стандарт</h3>
+                    <div class="price">10 000 <small>₽</small></div>
+                    <ul>
+                        <li>2 часа съёмки</li>
+                        <li>60 обработанных фото</li>
+                        <li>Две локации</li>
+                        <li>Срок — 7 дней</li>
+                        <li>Помощь в выборе образов</li>
+                    </ul>
+                    <a href="#contact" class="btn" style="width:100%;">Выбрать</a>
+                </div>
+                <div class="pricing-card scale-up" style="transition-delay:0.2s;">
+                    <div class="plan">Максимум</div>
+                    <h3>Премиум</h3>
+                    <div class="price">20 000 <small>₽</small></div>
+                    <ul>
+                        <li>4 часа съёмки</li>
+                        <li>150+ обработанных фото</li>
+                        <li>Все локации</li>
+                        <li>Срок — 3 дня</li>
+                        <li>Подбор образов и стиль</li>
+                        <li>Фотокнига в подарок</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline" style="width:100%;">Выбрать</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SOCIAL PROOF ===== -->
+    <section class="social-proof">
+        <div class="container">
+            <a href="https://t.me/Arkadiivanov" target="_blank">
+                <span class="icon">📱</span> Telegram
+            </a>
+            <a href="https://wa.me/79669969069" target="_blank">
+                <span class="icon">💬</span> WhatsApp
+            </a>
+            <a href="https://instagram.com" target="_blank">
+                <span class="icon">📸</span> Instagram
+            </a>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-label">Свяжитесь со мной</div>
+            <h2 class="section-title">Обсудим вашу <span style="color:#ff6b35;">идею</span></h2>
+            <p class="section-subtitle">Напишите или позвоните — я всегда на связи</p>
+            <div class="contact-info">
+                <div class="contact-item fade-up">
+                    <div class="icon">📞</div>
+                    <h4>Телефон</h4>
+                    <a href="tel:+79669969069">+7 966 996 90 69</a>
+                </div>
+                <div class="contact-item fade-up" style="transition-delay:0.1s;">
+                    <div class="icon">✉️</div>
+                    <h4>Email</h4>
+                    <a href="mailto:Ashot2005Ashot@gmail.com">Ashot2005Ashot@gmail.com</a>
+                </div>
+                <div class="contact-item fade-up" style="transition-delay:0.2s;">
+                    <div class="icon">📍</div>
+                    <h4>Город</h4>
+                    <a href="#">Сочи, Россия</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 Ашот Гукасян — фотограф в Сочи. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <!-- ===== LIGHTBOX ===== -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="close">&times;</span>
+        <img id="lightboxImg" src="" alt="" />
+    </div>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+        // === NAVBAR SCROLL ===
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 80) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // === BURGER MENU ===
+        document.getElementById('burger').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('open');
+        });
+
+        // === SCROLL ANIMATIONS ===
+        const fadeElements = document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-up');
+
+        function checkVisibility() {
+            fadeElements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                const triggerPoint = window.innerHeight * 0.85;
+                if (rect.top < triggerPoint) {
+                    el.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', checkVisibility);
+        window.addEventListener('load', checkVisibility);
+        setTimeout(checkVisibility, 300);
+
+        // === LIGHTBOX ===
+        function openLightbox(el) {
+            const img = el.querySelector('img');
+            document.getElementById('lightboxImg').src = img.src;
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+
+        // === SMOOTH SCROLL FOR NAV LINKS ===
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                const target = document.querySelector(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    document.getElementById('navLinks').classList.remove('open');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
